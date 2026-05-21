@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import TechStackMarquee from "../components/TechStackMarquee";
 
-const backgroundImage = "/images/ajay-background.jpg.webp";
+const backgroundImage = "/images/ajay-landing.jpg.jpg";
 const landingImage = "/images/ajay-landing.jpg.jpg";
 
 const projects = [
