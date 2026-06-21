@@ -50,48 +50,78 @@ const skillGroups = [
 const projects = [
   {
     number: "01",
-    title: "Restaurant QR Ordering SaaS",
-    label: "Flagship build",
+    title: "DineLink OS",
+    label: "AI hotel SaaS",
+    featured: true,
+    badge: "Flagship product",
     color: "orange",
-    summary: "A practical ordering platform that turns a restaurant table into a fast digital experience.",
-    problem: "Small restaurants need affordable ordering and operations tools without complicated setup.",
-    solution: "A QR-first MERN platform for menus, table orders, rooms, customers, and owner workflows.",
-    stack: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
-    features: ["QR menu and ordering", "Admin operations", "Customer and room flows"],
-    challenge: "Designing one simple workflow for customers, staff, and owners.",
+    image: "/images/projects/dinelink-os.png",
+    liveUrl: "https://restaurant-and-hotel-management-website.onrender.com/",
+    repoUrl: "https://github.com/byte-craft-07/Restaurant-and-Hotel-management-website-",
+    summary: "An AI-powered QR room-service and hotel operations platform connecting guests, staff, and kitchens.",
+    problem: "Most hotel QR menus are static, ignore guest intent, and do not connect cleanly with room verification or kitchen operations.",
+    solution: "DineLink OS turns a room QR into a branded ordering journey with natural-language cart building, secure verification, and live operational dashboards.",
+    stack: ["React", "Vite", "Tailwind", "Express", "MongoDB", "Socket.IO", "JWT"],
+    features: ["AI natural-language ordering", "Room-aware QR verification", "Live kitchen display system", "Bookings, loyalty, and analytics"],
+    cardHighlights: ["AI QR Ordering", "Hotel CRM", "Live Kitchen"],
+    workflowLabel: "Guest CRM & service loop",
+    workflow: [
+      ["01", "Guest capture", "Room QR, booking profile, preferences, and room context enter one guest record."],
+      ["02", "AI conversion", "Natural-language requests become verified menu and cart actions."],
+      ["03", "Live fulfillment", "Socket.IO sends room-aware tickets to kitchen and service dashboards."],
+      ["04", "Retention CRM", "Order history, loyalty, bookings, and analytics support personalized repeat service."],
+    ],
+    impact: "One connected journey: guest → AI order → kitchen → service → loyalty",
+    challenge: "Creating one calm, mobile-first product flow for guests while keeping real-time staff and kitchen operations reliable.",
     status: "Building",
   },
   {
     number: "02",
     title: "Vijay AI Voice Assistant",
-    label: "AI experiment",
+    label: "AI agent system",
+    featured: true,
+    badge: "Intelligent agent",
     color: "yellow",
-    summary: "A voice-driven assistant prototype exploring prompts, tools, memory, and useful automation.",
+    image: "/images/projects/vijay_agent.jpeg",
+    summary: "A voice-reactive AI core that listens, reasons, runs tools, tracks system health, and learns from feedback.",
     problem: "Everyday digital actions still require too many manual steps and disconnected tools.",
-    solution: "An assistant architecture that combines voice input, AI reasoning, and task workflows.",
-    stack: ["Python", "AI Agents", "Prompting", "Voice Tools"],
-    features: ["Voice interaction", "Tool-based actions", "Prompt and agent experiments"],
-    challenge: "Keeping responses useful, predictable, and safe across different requests.",
+    solution: "A modular desktop agent architecture combining a voice core, contextual chat, quick actions, camera access, task tools, and a self-learning feedback layer.",
+    stack: ["Python", "AI Agents", "NLP", "Voice Tools", "Automation", "Computer Vision"],
+    features: ["Always-ready voice command core", "Notes, weather, mail, news, and stock tools", "Camera and system monitoring", "Self-learning feedback and workflow scoring"],
+    cardHighlights: ["Voice Core", "Self Learning", "Task Automation"],
+    workflowLabel: "Voice-to-action intelligence loop",
+    workflow: [
+      ["01", "Listen", "Voice input and conversation context capture the user's intent."],
+      ["02", "Understand", "NLP, memory, and rules classify the request and choose a workflow."],
+      ["03", "Act", "Connected tools perform notes, weather, mail, news, camera, and automation tasks."],
+      ["04", "Learn", "Feedback, weak/slow events, and workflow scores improve future decisions."],
+    ],
+    impact: "Voice → context → reasoning → tools → feedback",
+    challenge: "Keeping autonomous actions useful, observable, predictable, and safe across changing requests.",
     status: "Researching",
   },
   {
     number: "03",
-    title: "Local Delivery Platform",
-    label: "Startup concept",
+    title: "RentEase Rental Platform",
+    label: "Full-stack platform",
     color: "green",
-    summary: "A neighborhood delivery concept connecting local stores, customers, and delivery partners.",
-    problem: "Local sellers often lack simple digital discovery and last-mile delivery systems.",
-    solution: "A location-aware marketplace with clear ordering and delivery status workflows.",
-    stack: ["MERN", "Maps", "REST API", "Product Design"],
-    features: ["Local discovery", "Order lifecycle", "Delivery partner flow"],
-    challenge: "Balancing three user journeys while keeping operations understandable.",
-    status: "Planning",
+    image: "/images/projects/rentease.jpeg",
+    repoUrl: "https://github.com/byte-craft-07/Rentease-rental-platform",
+    summary: "A production-oriented furniture and appliance rental platform for students and relocating professionals.",
+    problem: "People moving frequently need essential furniture and appliances without high ownership costs or inflexible commitments.",
+    solution: "A MERN rental system covering product discovery, tenure, checkout, delivery, returns, maintenance, and role-based operations.",
+    stack: ["React", "Vite", "Node.js", "Express", "MongoDB", "REST API", "JWT"],
+    features: ["Catalog, cart, and checkout", "Active rentals and extensions", "Maintenance and return workflows", "Admin and vendor operations"],
+    challenge: "Coordinating customer, vendor, and admin lifecycles across inventory, delivery, rental, and maintenance states.",
+    status: "Building",
   },
   {
     number: "04",
     title: "Wanderlust Travel Website",
     label: "Full-stack app",
     color: "blue",
+    image: "/images/projects/wanderlist.jpeg",
+    repoUrl: "https://github.com/byte-craft-07/Wanderlist-",
     summary: "A travel listing product built around clean routing, database features, and useful browsing.",
     problem: "Learning full-stack concepts in isolation does not reveal how real product flows connect.",
     solution: "A complete listing application with reusable pages, CRUD workflows, and database integration.",
@@ -165,19 +195,40 @@ function ProjectModal({ project, onClose }) {
       >
         <button className="icon-button modal-close" onClick={onClose} aria-label="Close project case study"><X /></button>
         <span className="case-stamp">Case file {project.number}</span>
+        {project.badge && <span className="case-featured-badge">{project.badge}</span>}
         <p className="case-label">{project.label}</p>
         <h2 id="case-title">{project.title}</h2>
         <p className="case-summary">{project.summary}</p>
+        {project.image && <img className="case-hero-image" src={project.image} alt={`${project.title} interface`} />}
         <div className="case-study-grid">
           <section><span>01 / Problem</span><p>{project.problem}</p></section>
           <section><span>02 / Solution</span><p>{project.solution}</p></section>
           <section><span>03 / Challenge</span><p>{project.challenge}</p></section>
           <section><span>04 / Features</span><ul>{project.features.map((feature) => <li key={feature}><CheckCircle2 />{feature}</li>)}</ul></section>
         </div>
+        {project.workflow && (
+          <section className="product-workflow" aria-label={project.workflowLabel}>
+            <div className="workflow-heading">
+              <span>How the product works</span>
+              <h3>{project.workflowLabel}</h3>
+              <p>{project.impact}</p>
+            </div>
+            <div className="workflow-steps">
+              {project.workflow.map(([step, title, detail]) => (
+                <article key={step}>
+                  <span>{step}</span>
+                  <h4>{title}</h4>
+                  <p>{detail}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
         <div className="case-footer">
           <div className="tag-list">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
           <div className="case-actions">
-            <a href={contact.github} target="_blank" rel="noreferrer"><GitFork /> GitHub</a>
+            {project.liveUrl && <a className="case-live-link" href={project.liveUrl} target="_blank" rel="noreferrer"><ExternalLink /> Live demo</a>}
+            <a href={project.repoUrl || contact.github} target="_blank" rel="noreferrer"><GitFork /> GitHub</a>
             <span className="case-status"><i /> {project.status}</span>
           </div>
         </div>
@@ -319,7 +370,7 @@ export default function AjayPortfolio() {
             {projects.map((project, index) => (
               <motion.button
                 type="button"
-                className={`project-file project-${project.color} wall-reveal`}
+                className={`project-file project-${project.color} ${project.featured ? "is-featured" : ""} wall-reveal`}
                 key={project.title}
                 onClick={() => setActiveProject(project)}
                 whileHover={{ y: -10, rotate: index % 2 ? 1.5 : -1.5 }}
@@ -328,9 +379,13 @@ export default function AjayPortfolio() {
                 <span className="project-pin"><Pin /></span>
                 <span className="project-number">{project.number}</span>
                 <span className="project-label">{project.label}</span>
-                <span className="project-visual"><Code2 /><i /><i /><i /></span>
+                {project.badge && <span className="featured-ribbon">{project.badge}</span>}
+                <span className={`project-visual ${project.image ? "has-image" : ""}`}>
+                  {project.image ? <img src={project.image} alt={`${project.title} project preview`} loading="lazy" /> : <><Code2 /><i /><i /><i /></>}
+                </span>
                 <strong>{project.title}</strong>
                 <span className="project-summary">{project.summary}</span>
+                {project.cardHighlights && <span className="project-highlights">{project.cardHighlights.map((item) => <i key={item}>{item}</i>)}</span>}
                 <span className="project-open">Open case file <ArrowUpRight /></span>
               </motion.button>
             ))}
